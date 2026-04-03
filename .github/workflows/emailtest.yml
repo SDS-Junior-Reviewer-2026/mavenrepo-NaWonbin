@@ -31,7 +31,7 @@ jobs:
           aws ses send-email  \
             --from "mincoding@naver.com"  \
             --destination "ToAddresses=sejin.choi@mincoding.co.kr"  \
-            --message "Subject={Data=심현우 화이팅}, Body={Text={Data=심현우 화이팅 ^^}}"
+            --message "Subject={Data=나원빈}, Body={Text={Data=심현우 화이팅 ^^}}"
             
        
 
