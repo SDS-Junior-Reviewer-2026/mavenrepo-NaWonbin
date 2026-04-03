@@ -1,0 +1,38 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Email Test
+
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{  secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{  secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Send Email with SES
+        run: |
+          aws ses send-email  \
+            --from "mincoding@naver.com"  \
+            --destination "ToAddresses=sejin.choi@mincoding.co.kr"  \
+            --message "Subject={Data=심현우 화이팅}, Body={Text={Data=심현우 화이팅 ^^}}"
+            
+       
+
+
